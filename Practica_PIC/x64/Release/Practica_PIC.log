@@ -1,0 +1,9 @@
+﻿  Practica_PIC.cpp
+Practica_PIC.cpp(31): warning C4101: 'a': variable local sin referencia
+  Generando código
+  5 of 109 functions ( 4.6%) were compiled, the rest were copied from previous compilation.
+    4 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Generación de código finalizada
+  Practica_PIC.vcxproj -> C:\Users\Ainoa\Desktop\Practica_PIC\x64\Release\Practica_PIC.exe
+  Practica_PIC.vcxproj -> C:\Users\Ainoa\Desktop\Practica_PIC\x64\Release\Practica_PIC.pdb (Full PDB)

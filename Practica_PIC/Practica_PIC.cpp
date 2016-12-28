@@ -103,7 +103,7 @@ int main(int argc, const char** argv)
 			cout << "ERROR : cannot read" << endl;
 			return -1;
 		}
-		Rect roi(340, 100, 270, 270);
+		Rect roi(340, 100, 200, 200);
 
 		rectangle(img, roi, 2, 10, 8);
 

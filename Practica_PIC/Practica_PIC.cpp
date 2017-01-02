@@ -10,7 +10,7 @@ using namespace std;
 
 int main(int argc, const char** argv)
 {
-	VideoCapture cam(1);
+	VideoCapture cam(1); // (0 = Camara del pc ; 1 = Camara externa)
 	if (!cam.isOpened()) {
 		cout << "ERROR not opened " << endl;
 		return -1;
@@ -51,7 +51,7 @@ int main(int argc, const char** argv)
 
 			
 			//Valor de intensidad de los pixeles
-			//Esto estaba en el programa anterior, funciona, no s?si servir?de algo
+			//Esto estaba en el programa anterior, funciona, no se si serviran de algo
 			float cx = 0.0, cy = 0.0;
 			float sumi = 1.0;
 			for (int i = 0; i < img_threshold.rows; i++) {
@@ -72,7 +72,7 @@ int main(int argc, const char** argv)
 			findContours(temp, contours, hierarchy, RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point());
 			
 
-			//Calculamos el mayor valor en el vector contours y su posici髇
+			//Calculamos el mayor valor en el vector contours y su posicion
 			int c_size = 0, c_idx = 0;
 			Mat drawing = capturada.clone();
 			for (int i = 0; i < contours.size(); i++) {
@@ -85,7 +85,7 @@ int main(int argc, const char** argv)
 				}
 			}
 
-			//Pasamos el mayor valor al vector boundary0 (es el rect醤gulo)
+			//Pasamos el mayor valor al vector boundary0 (es el rectagulo)
 			vector<Point> boundary0;
 			//Acumulamos el vector que se dibuja en una nueva variable
 			vector<Point> boundary1;

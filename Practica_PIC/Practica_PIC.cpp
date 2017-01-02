@@ -46,9 +46,10 @@ int main(int argc, const char** argv)
 			capturada = img_roi.clone();
 			cvtColor(capturada, img_gray, CV_RGB2GRAY);
 			GaussianBlur(img_gray, img_gray, Size(19, 19), 0.0, 0);
-			threshold(img_gray, img_threshold, 127, 255, THRESH_BINARY_INV + THRESH_OTSU);
+			threshold(img_gray, img_threshold, 127, 255, THRESH_BINARY + THRESH_OTSU);
 			//Canny(img_gray, img_threshold, 100, 200, 3);
 
+			imshow("Threshold", img_threshold);
 			
 			//Valor de intensidad de los pixeles
 			//Esto estaba en el programa anterior, funciona, no se si serviran de algo
@@ -123,11 +124,16 @@ int main(int argc, const char** argv)
 			//ESTE BUCLE NO FUNCIONA! MALDITO BUCLE! - PERO ES MUY INTERESANTE
 			for (int i = 0; i<img_threshold.cols; i++) {
 				cout << "Bucle 1: " << i << endl;
+				cout << "	rows = " << img_threshold.rows << endl;
+				cout << "	cols = " << img_threshold.cols << endl;
+				
 				if (img_threshold.at<uchar>(img_threshold.rows - 1, i) > 0) {
+					cout << "	1. at = " << (int)img_threshold.at<uchar>(img_threshold.rows - 1, i) << endl;
 					orientation = 0;
 					break;
 				}
 				else if (img_threshold.at<uchar>(i, img_threshold.cols - 1) > 0) {
+					cout << "	2. at = " << (int)img_threshold.at<uchar>(i, img_threshold.cols - 1) << endl;
 					orientation = 1;
 					break;
 				}

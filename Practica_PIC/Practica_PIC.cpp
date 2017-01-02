@@ -10,7 +10,7 @@ using namespace std;
 
 int main(int argc, const char** argv)
 {
-	VideoCapture cam(0);
+	VideoCapture cam(1);
 	if (!cam.isOpened()) {
 		cout << "ERROR not opened " << endl;
 		return -1;
@@ -51,7 +51,7 @@ int main(int argc, const char** argv)
 
 			
 			//Valor de intensidad de los pixeles
-			//Esto estaba en el programa anterior, funciona, no sé si servirá de algo
+			//Esto estaba en el programa anterior, funciona, no s?si servir?de algo
 			float cx = 0.0, cy = 0.0;
 			float sumi = 1.0;
 			for (int i = 0; i < img_threshold.rows; i++) {
@@ -72,7 +72,7 @@ int main(int argc, const char** argv)
 			findContours(temp, contours, hierarchy, RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point());
 			
 
-			//Calculamos el mayor valor en el vector contours y su posición
+			//Calculamos el mayor valor en el vector contours y su posici髇
 			int c_size = 0, c_idx = 0;
 			Mat drawing = capturada.clone();
 			for (int i = 0; i < contours.size(); i++) {
@@ -85,7 +85,7 @@ int main(int argc, const char** argv)
 				}
 			}
 
-			//Pasamos el mayor valor al vector boundary0 (es el rectángulo)
+			//Pasamos el mayor valor al vector boundary0 (es el rect醤gulo)
 			vector<Point> boundary0;
 			//Acumulamos el vector que se dibuja en una nueva variable
 			vector<Point> boundary1;
@@ -99,10 +99,10 @@ int main(int argc, const char** argv)
 
 			convexHull(boundary1,hull,true,true);
 			hull2 = isContourConvex(boundary1);
-			cout << "Convex" << hull << endl;
-			cout << "Convex" << hull2 << endl;
-			cout << "Area" << contourArea(boundary1) << endl;
-			cout << "Perimetro" << arcLength(boundary1,true) << endl;
+			cout << "Convex " << hull << endl;
+			cout << "Convex " << hull2 << endl;
+			cout << "Area " << contourArea(boundary1) << endl;
+			cout << "Perimetro " << arcLength(boundary1,true) << endl;
 
 
 			//NO ENTIENDO BIEN ESTA FUNCION
@@ -111,12 +111,12 @@ int main(int argc, const char** argv)
 			if (!boundary0.empty()) {
 				approxPolyDP(boundary1, boundary, 2, false); //Aproxima el valor del contorno
 				for (int i = 0; i < boundary.size(); i++) {
-					circle(capturada, boundary[i], 25, Scalar(0, 255, 0));
+					circle(capturada, boundary[i], 1, Scalar(0, 255, 0));
 				}
 			}
 
 
-			//Comprobamos la orientación de la mano
+			//Comprobamos la orientacion de la mano
 			int orientation = 0;
 			vector<Point> peaks_;
 			vector<Point> peaks0;
@@ -132,7 +132,7 @@ int main(int argc, const char** argv)
 					break;
 				}
 			}
-			cout << "Orientación: " << orientation << endl;
+			cout << "Orientacion: " << orientation << endl;
 
 			if (orientation == 0) {
 				for (int i = 0; (i + 1) < boundary1.size(); i++) {
@@ -146,7 +146,7 @@ int main(int argc, const char** argv)
 						}
 						if (isPeak) {
 							peaks_.push_back(p);
-							circle(img_threshold, p + Point(roi.x, roi.y), 20, Scalar(255, 0, 0));
+							circle(img_threshold, p + Point(roi.x, roi.y), 1, Scalar(255, 0, 0));
 						}
 					}
 				}
@@ -158,7 +158,7 @@ int main(int argc, const char** argv)
 					continue;
 				}
 				peaks0.push_back(peaks_[i]);
-				circle(capturada, peaks_[i], 20, Scalar(0, 0, 255));
+				circle(capturada, peaks_[i], 10, Scalar(0, 0, 255));
 				cout << "Picos "<< peaks_[i] << endl;
 			}
 

@@ -44,8 +44,8 @@ double comparar(Mat alfabeto, Mat img_tratada)
 
 	findContours(bordes_tratada, contours_tratada, hierarchy_tratada, RETR_LIST, CHAIN_APPROX_SIMPLE);
 	cout << "mmmm2: " << matchresult << endl;
-	//cout << "El tama駉 es" << contours_alfabeto.size() << endl;
-	//cout << "El tama駉 2 es" << contours_tratada.size() << endl;
+	//cout << "El tamaño es" << contours_alfabeto.size() << endl;
+	//cout << "El tamaño 2 es" << contours_tratada.size() << endl;
 
 	
 

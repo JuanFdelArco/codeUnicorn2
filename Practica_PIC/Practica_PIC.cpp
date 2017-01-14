@@ -23,7 +23,7 @@ double comparar(Mat alfabeto, Mat img_tratada)
 
 	threshold(alfabeto, bordes_alfabeto, 127, 255, THRESH_BINARY);
 	//imshow("prueba", bordes_alfabeto);
-	threshold(img_tratada,bordes_tratada, 127, 255, THRESH_BINARY);
+	threshold(img_tratada, bordes_tratada, 127, 255, THRESH_BINARY);
 	//cout << "mmm1:  " << matchresult << endl;
 
 	resize(alfabeto, alfabeto, img_tratada.size());
@@ -39,8 +39,8 @@ double comparar(Mat alfabeto, Mat img_tratada)
 	vector<Point> boundary;
 	vector<Point> boundary2;
 	int c_size = 0, c_idx = 0;
-	Mat foto=bordes_tratada.clone();
-	Mat foto2=bordes_alfabeto.clone();
+	Mat foto = bordes_tratada.clone();
+	Mat foto2 = bordes_alfabeto.clone();
 	Mat foto3;
 	Mat match;
 
@@ -79,28 +79,28 @@ double comparar(Mat alfabeto, Mat img_tratada)
 	//cout << "Nueva secuencia 1: " << nueva_secuencia_1 << endl;
 	//cout << "Nueva secuencia 2: " << nueva_secuencia_2 << endl;
 
-	cout << "antes del if" <<matchresult<< endl;
+	cout << "antes del if" << matchresult << endl;
 	if (nuevo1 == true && nuevo2 == true)
 	{
 		//cout << "nueva secuencia2:  " << nueva_secuencia_2 << endl;
 		//cout << "nueva secuencia 1" << nueva_secuencia_1 << endl;
 
-		matchresult = matchShapes(nueva_secuencia_2, nueva_secuencia_1, 3, 0);
+		matchresult = matchShapes(nueva_secuencia_2, nueva_secuencia_1, 1, 0);
 		//cout << "mmmm3: " << matchresult << endl;
 	}
 	cout << "Match:" << matchresult << endl;
 
 
-	//for (int i = 0; i < contours_tratada.size(); i++) {
-	//	if (contours_tratada.size() > c_size) { 
-	//		c_idx = i;
-	//		c_size = contours_tratada.size();
-	//	}
-	//	drawContours(foto, contours_tratada, i, (0, 0, 255), 2, 8, hierarchy_alfabeto, 0);
+	for (int i = 0; i < contours_tratada.size(); i++) {
+		if (contours_tratada.size() > c_size) { 
+			c_idx = i;
+			c_size = contours_tratada.size();
+		}
+		drawContours(foto, contours_tratada, i, (0, 0, 255), 2, 8, hierarchy_alfabeto, 0);
 
-	//}
+	}
 
-	//imshow("Contorno tratada", foto);
+	imshow("Contorno tratada", foto);
 
 	//for (int i = 0; i < contours_alfabeto.size(); i++) {
 	//	if (contours_alfabeto.size() > c_size) { 
@@ -123,15 +123,15 @@ double comparar(Mat alfabeto, Mat img_tratada)
 }
 
 
-void buscaletras(vector<Mat> letras, vector<Mat> resultados, Mat img_threshold){
+void buscaletras(vector<Mat> letras, vector<Mat> resultados, Mat img_threshold) {
 	double menor_coincidencia = 1.8;
 	int index;
-	bool encontrado=false;
+	bool encontrado = false;
 
 	for (int i = 0; i<letras.size(); i++)
 	{
 		//acumular coincidencia para comprobar cual es la mayor
-		double coincidencia = comparar(letras[i],img_threshold);
+		double coincidencia = comparar(letras[i], img_threshold);
 
 		if (coincidencia < menor_coincidencia)
 		{
@@ -142,10 +142,11 @@ void buscaletras(vector<Mat> letras, vector<Mat> resultados, Mat img_threshold){
 		}
 	}
 
-	if(encontrado)
-			{
-				imshow("Resultado", resultados[index]);
-			} else cvDestroyWindow( "Resultado");
+	if (encontrado)
+	{
+		imshow("Resultado", resultados[index]);
+	}
+	else cvDestroyWindow("Resultado");
 }
 
 int main(int argc, const char** argv)
@@ -154,10 +155,11 @@ int main(int argc, const char** argv)
 	vector<Mat> letras_abajo;
 	vector<Mat> letras_derecha;
 	vector<Mat> letras_arriba;
-	Mat letra_A,letra_B, letra_C, letra_D, letra_E, letra_F, letra_G, letra_H, letra_I, letra_J, letra_K, letra_L, letra_M, letra_N, letra_O, letra_P, letra_Q, letra_R, letra_S, letra_T, letra_U, letra_V, letra_W, letra_X, letra_Y, letra_Z;
-	letra_A= imread("A.JPG", CV_LOAD_IMAGE_GRAYSCALE);
+	Mat letra_A, letra_B, letra_C, letra_D, letra_E, letra_F, letra_G, letra_H, letra_I, letra_J, letra_K, letra_L, letra_M, letra_N, letra_O, letra_P, letra_Q, letra_R, letra_S, letra_T, letra_U, letra_V, letra_W, letra_X, letra_Y, letra_Z;
+	Mat alfabeto_completo = imread("Alfabeto.jpg", CV_LOAD_IMAGE_GRAYSCALE);
+	letra_A = imread("A.JPG", CV_LOAD_IMAGE_GRAYSCALE);
 	letras_abajo.push_back(letra_A);
-	letra_B= imread("B.JPG", CV_LOAD_IMAGE_GRAYSCALE);
+	letra_B = imread("B.JPG", CV_LOAD_IMAGE_GRAYSCALE);
 	letras_derecha.push_back(letra_B);
 	letra_C = imread("C.JPG", CV_LOAD_IMAGE_GRAYSCALE);
 	letras_derecha.push_back(letra_C);
@@ -277,7 +279,7 @@ int main(int argc, const char** argv)
 	Mat img_roi;
 	Mat capturada;
 
-	double coincidencia; 
+	double coincidencia;
 
 	namedWindow("Original_image", CV_WINDOW_AUTOSIZE);
 	namedWindow("Gray_image", CV_WINDOW_AUTOSIZE);
@@ -295,8 +297,9 @@ int main(int argc, const char** argv)
 			return -1;
 		}
 		Rect roi(100, 100, 260, 260);
-		rectangle(img, roi, 2, 1, 8);
+		rectangle(img, roi, 255, 1, 8);
 		imshow("Original_image", img);
+		imshow("Alfabeto completo", alfabeto_completo);
 		img_roi = img(roi);
 
 		//Capturamos la imagen del signo
@@ -304,8 +307,14 @@ int main(int argc, const char** argv)
 			capturada = img_roi.clone();
 			//Binarizamos y filtramos la imagen
 			cvtColor(capturada, img_gray, CV_RGB2GRAY);
+			imshow("ROI", capturada);
+			imshow("Gray_image", img_gray);
 			GaussianBlur(img_gray, img_gray, Size(19, 19), 0.0, 0);
+			imshow("Gaussiana",img_gray);
 			threshold(img_gray, img_threshold, 127, 255, THRESH_BINARY);
+			imshow("Thresholded_image", img_threshold);
+			
+
 
 			for (int i = 0; i<img_threshold.cols; i++) {
 				if (img_threshold.at<uchar>(3, i) > 0) {
@@ -328,14 +337,13 @@ int main(int argc, const char** argv)
 			cout << " " << orientation << endl << endl;
 
 
-			
+
 			//Comparamos la imagen con los signos acumlados
 
-			imshow("Original_image", capturada);
-			imshow("Threshold", img_threshold);
+			//imshow("Original_image", capturada);
+			//imshow("Threshold", img_threshold);
 
 		}
 	}
 	return 0;
 }
-
